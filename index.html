@@ -1,131 +1,634 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#111827">
-<title>MAYER PAY | Orange Cash</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090d16">
+<title>MAYER PAY | Premium</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
 <style>
-:root{--bg:#0b1020;--panel:#151d30;--muted:#9aa7bd;--orange:#ff7900;--line:#29344b;--white:#f8fafc}
-*{box-sizing:border-box}
-body{margin:0;min-height:100vh;font-family:Tahoma,Arial,sans-serif;background:radial-gradient(circle at 80% 0%,#26334d 0,transparent 36%),linear-gradient(145deg,#090e1b,#10192b);color:var(--white);display:grid;place-items:center;padding:22px}
-.wrap{width:min(100%,440px)}
-.top{display:flex;justify-content:space-between;align-items:center;margin:0 4px 18px}
-.brand{font-weight:900;letter-spacing:2px;font-size:21px}.brand span{color:var(--orange)}
-.pill{font-size:11px;color:#b9f6d0;border:1px solid #236c4b;background:#123b2c;padding:7px 10px;border-radius:30px}
-.card{background:linear-gradient(155deg,rgba(27,38,59,.98),rgba(17,25,42,.98));border:1px solid #34415b;border-radius:27px;padding:25px;box-shadow:0 24px 70px #0008;overflow:hidden;position:relative}
-.card:before{content:"";position:absolute;width:220px;height:220px;border-radius:50%;background:#ff790012;top:-120px;left:-80px;pointer-events:none}
-.logo{display:flex;align-items:center;gap:11px;position:relative}
-.logo-icon{width:45px;height:45px;border-radius:15px;background:linear-gradient(135deg,#ff9b36,#f26500);display:grid;place-items:center;font-size:23px;box-shadow:0 8px 25px #ff790044}
-.logo small{display:block;color:var(--muted);font-size:11px;margin-top:4px;letter-spacing:.5px}
-.status{display:flex;align-items:center;gap:8px;margin:25px 0 20px;padding:12px 14px;background:#102f28;border:1px solid #1c654b;border-radius:14px;color:#a7f3d0;font-size:13px}
-.dot{width:8px;height:8px;border-radius:50%;background:#34d399;box-shadow:0 0 12px #34d399}
-.amount-box{text-align:center;padding:21px 10px 23px;border-bottom:1px solid var(--line)}
-.eyebrow{font-size:12px;color:var(--muted)}
-.amount{font-size:48px;font-weight:900;letter-spacing:-1px;margin:9px 0 4px;direction:ltr}
-.amount span{font-size:17px;color:#ffb36e;margin-left:5px}
-.sub{font-size:12px;color:var(--muted)}
-.details{padding:20px 0 5px}
-.label{font-size:12px;color:var(--muted);margin-bottom:9px}
-.wallet-row{display:flex;gap:9px}
-.wallet{flex:1;min-width:0;background:#0d1525;border:1px solid var(--line);border-radius:13px;padding:14px 12px;text-align:center;direction:ltr;font-weight:700;letter-spacing:1px;color:#fff}
-button{font:inherit;cursor:pointer;border:0}
-.copy{background:#28354d;color:#fff;border-radius:13px;padding:0 15px;font-size:12px}
-.hint{font-size:11px;line-height:1.8;color:var(--muted);margin:9px 2px 0}
-.instructions{margin-top:18px;background:#101a2c;border:1px solid var(--line);border-radius:16px;padding:15px}
-.instructions strong{font-size:13px}
-.instructions ol{padding-right:19px;margin:10px 0 0;color:#c4cede;font-size:12px;line-height:2}
-.cta{width:100%;margin-top:17px;background:linear-gradient(100deg,#ff8a1d,#f36b00);color:#1b1208;font-weight:900;padding:15px;border-radius:15px;box-shadow:0 9px 25px #ff790033}
-.cta:active{transform:scale(.99)}
-.foot{text-align:center;color:#73819a;font-size:10px;line-height:1.8;margin:17px 8px 0}
-.toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,20px);background:#e8fff4;color:#075b3d;padding:11px 17px;border-radius:30px;font-size:12px;opacity:0;transition:.25s;pointer-events:none;box-shadow:0 8px 30px #0005}
-.toast.show{opacity:1;transform:translate(-50%,0)}
-@media(max-width:380px){body{padding:13px}.card{padding:20px}.amount{font-size:42px}}
-</style>
-</head>
-<body>
-<main class="wrap">
-  <header class="top">
-    <div class="brand">MAYER <span>PAY</span></div>
-    <div class="pill">ORANGE CASH</div>
-  </header>
-
-  <section class="card">
-    <div class="logo">
-      <div class="logo-icon">⌁</div>
-      <div><b>Mayer Pay</b><small>SMART NFC PAYMENT PAGE</small></div>
-    </div>
-
-    <div class="status"><i class="dot"></i><span id="statusText">تم فتح صفحة الدفع بنجاح</span></div>
-
-    <section class="amount-box">
-      <div class="eyebrow">المبلغ المطلوب تحويله</div>
-      <div class="amount"><span>EGP</span>100.00</div>
-      <div class="sub">جنيه مصري</div>
-    </section>
-
-    <section class="details">
-      <div class="label">رقم محفظة Orange Cash المستلمة</div>
-      <div class="wallet-row">
-        <div class="wallet" id="walletNumber">01XXXXXXXXX</div>
-        <button class="copy" id="copyBtn" type="button">نسخ الرقم</button>
-      </div>
-      <p class="hint">استبدل الرقم التجريبي داخل الكود برقم المحفظة الصحيح قبل كتابة رابط الصفحة على كارت NFC.</p>
-    </section>
-
-    <section class="instructions">
-      <strong>إتمام التحويل بأمان</strong>
-      <ol>
-        <li>انسخ رقم المحفظة الموضح بالأعلى.</li>
-        <li>افتح تطبيق Orange Cash أو اطلب كود الخدمة الرسمي.</li>
-        <li>اختار تحويل الأموال، واكتب الرقم والمبلغ: 100 جنيه.</li>
-        <li>راجع اسم المستلم والمبلغ، ثم أكّد التحويل بنفسك.</li>
-      </ol>
-    </section>
-
-    <button class="cta" id="copyAll" type="button">نسخ بيانات التحويل</button>
-  </section>
-
-  <footer class="foot">MAYER PAY واجهة مساعدة للتحويل فقط — لا تستقبل الأموال ولا تنفّذ خصمًا تلقائيًا.<br>تأكد من بيانات المستلم داخل تطبيق Orange Cash قبل تأكيد أي تحويل.</footer>
-</main>
-<div class="toast" id="toast" role="status" aria-live="polite">تم النسخ</div>
-<script>
-/* غيّر الرقم ده لرقم محفظتك قبل نشر الصفحة */
-const WALLET_NUMBER = "01XXXXXXXXX";
-const AMOUNT = "100";
-document.getElementById("walletNumber").textContent = WALLET_NUMBER;
-
-/* وجود ?source=nfc يعني أن رابط الصفحة مُعدّ ليفتح من كارت NFC،
-   لكنه لا يثبت تقنيًا أن المتصفح قرأ الكارت بالفعل. */
-const params = new URLSearchParams(location.search);
-if (params.get("source") === "nfc") {
-  document.getElementById("statusText").textContent = "تم فتح رابط بطاقة NFC";
+:root {
+  --orange:#ff7900;
+  --gold:#ffb45e;
+  --bg:#090d16;
+  --card:#141e30;
+  --muted:#9aa9bf;
+  --green:#39d69a;
 }
 
+* {
+  box-sizing:border-box;
+}
+
+body {
+  margin:0;
+  min-height:100vh;
+  padding:24px 14px;
+  font-family:'Cairo',sans-serif;
+  color:white;
+  background:
+    radial-gradient(circle at 10% 5%,#ff790025,transparent 35%),
+    radial-gradient(circle at 90% 70%,#355b9125,transparent 40%),
+    linear-gradient(145deg,#080c14,#101827);
+}
+
+button,input {
+  font-family:inherit;
+}
+
+button {
+  cursor:pointer;
+}
+
+.container {
+  max-width:500px;
+  margin:auto;
+}
+
+.nav {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:22px;
+}
+
+.logo {
+  font-size:24px;
+  font-weight:900;
+  letter-spacing:2px;
+}
+
+.logo span {
+  color:var(--orange);
+}
+
+.logo-icon {
+  display:inline-grid;
+  place-items:center;
+  width:38px;
+  height:38px;
+  margin-left:8px;
+  color:#231307;
+  background:linear-gradient(135deg,#ffc078,#ff7900);
+  border-radius:13px;
+}
+
+.secure {
+  font-size:11px;
+  color:#9df0c8;
+  background:#10291f;
+  border:1px solid #245a49;
+  padding:7px 12px;
+  border-radius:30px;
+}
+
+.main-card {
+  position:relative;
+  overflow:hidden;
+  padding:23px;
+  border:1px solid #34435c;
+  border-radius:28px;
+  background:linear-gradient(150deg,#1a263b,#111a29);
+  box-shadow:0 25px 80px #0008;
+}
+
+.header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+
+.eyebrow {
+  font-size:10px;
+  color:var(--muted);
+  letter-spacing:1px;
+}
+
+.title {
+  font-size:18px;
+  font-weight:800;
+}
+
+.orange-label {
+  background:#ff790018;
+  border:1px solid #ff79004d;
+  color:#ffb36e;
+  padding:7px 10px;
+  border-radius:10px;
+  font-size:11px;
+  font-weight:800;
+}
+
+.status {
+  margin:22px 0;
+  padding:12px;
+  border-radius:13px;
+  background:#102b24;
+  border:1px solid #225b49;
+  color:#a9f4d2;
+  font-size:12px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.dot {
+  width:8px;
+  height:8px;
+  background:var(--green);
+  border-radius:50%;
+  box-shadow:0 0 12px var(--green);
+}
+
+.amount-box {
+  padding:24px 12px;
+  text-align:center;
+  border:1px solid #35435b;
+  border-radius:21px;
+  background:#101a2b;
+}
+
+.small {
+  color:var(--muted);
+  font-size:12px;
+}
+
+.amount {
+  display:flex;
+  justify-content:center;
+  align-items:baseline;
+  gap:9px;
+  direction:ltr;
+  margin:8px 0;
+}
+
+.amount output {
+  font-size:58px;
+  font-weight:900;
+  line-height:1.2;
+}
+
+.currency {
+  color:var(--gold);
+  font-weight:800;
+}
+
+.amount-input {
+  width:100%;
+  margin-top:17px;
+  padding:12px;
+  text-align:center;
+  color:white;
+  background:#090f1b;
+  border:1px solid #34445e;
+  border-radius:12px;
+  outline:none;
+  font-size:16px;
+  font-weight:800;
+}
+
+.quick {
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:12px;
+}
+
+.quick button {
+  padding:7px 13px;
+  color:#e7edf7;
+  background:#202e44;
+  border:1px solid #35445d;
+  border-radius:30px;
+  font-size:11px;
+}
+
+.section {
+  margin-top:22px;
+}
+
+.section-title {
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:10px;
+  font-size:13px;
+  font-weight:800;
+}
+
+.section-title span {
+  color:var(--muted);
+  font-size:10px;
+}
+
+.wallet-row {
+  display:flex;
+  gap:8px;
+}
+
+.wallet-input {
+  width:100%;
+  min-width:0;
+  padding:13px;
+  text-align:center;
+  direction:ltr;
+  color:white;
+  background:#090f1b;
+  border:1px solid #34445e;
+  border-radius:12px;
+  outline:none;
+  font-weight:800;
+}
+
+.copy-btn {
+  padding:0 14px;
+  color:white;
+  background:#26354c;
+  border:1px solid #3b4b64;
+  border-radius:12px;
+  font-size:11px;
+  white-space:nowrap;
+}
+
+.helper {
+  color:var(--muted);
+  font-size:10px;
+  line-height:1.9;
+}
+
+.steps {
+  margin-top:23px;
+  display:grid;
+  gap:10px;
+}
+
+.steps-title {
+  font-size:14px;
+  font-weight:800;
+}
+
+.step {
+  display:flex;
+  align-items:flex-start;
+  gap:11px;
+  padding:12px;
+  background:#111c2d;
+  border:1px solid #27364d;
+  border-radius:13px;
+}
+
+.number {
+  width:26px;
+  height:26px;
+  display:grid;
+  place-items:center;
+  flex:none;
+  background:#ff79001c;
+  color:var(--gold);
+  border-radius:9px;
+  font-weight:900;
+}
+
+.step p {
+  margin:0;
+  font-size:11px;
+  line-height:1.9;
+  color:#c7d1df;
+}
+
+.actions {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:22px;
+}
+
+.btn {
+  padding:14px 8px;
+  border:0;
+  border-radius:13px;
+  font-weight:900;
+  font-size:12px;
+}
+
+.primary {
+  color:#241306;
+  background:linear-gradient(100deg,#ffbd75,#ff7900);
+}
+
+.secondary {
+  color:white;
+  background:#26354c;
+  border:1px solid #3b4b64;
+}
+
+.notice {
+  margin-top:18px;
+  padding:13px;
+  background:#2c2115;
+  border:1px solid #74502a;
+  border-radius:12px;
+  color:#f5d6ae;
+  font-size:10px;
+  line-height:1.9;
+}
+
+.footer {
+  margin-top:20px;
+  text-align:center;
+  color:#7888a1;
+  font-size:10px;
+  line-height:2;
+}
+
+.toast {
+  position:fixed;
+  bottom:25px;
+  left:50%;
+  transform:translate(-50%,20px);
+  opacity:0;
+  pointer-events:none;
+  background:#eafff5;
+  color:#075b3d;
+  padding:12px 20px;
+  border-radius:30px;
+  font-size:12px;
+  font-weight:800;
+  transition:.25s;
+  white-space:nowrap;
+}
+
+.toast.show {
+  opacity:1;
+  transform:translate(-50%,0);
+}
+
+@media(max-width:390px) {
+  .main-card {padding:17px}
+  .amount output {font-size:48px}
+  .actions {grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+<main class="container">
+
+<header class="nav">
+  <div class="logo">
+    <span class="logo-icon">M</span>
+    MAYER <span>PAY</span>
+  </div>
+  <div class="secure">● تجربة آمنة</div>
+</header>
+
+<article class="main-card">
+
+<header class="header">
+  <div>
+    <div class="eyebrow">SMART NFC EXPERIENCE</div>
+    <div class="title">استقبال تحويل Orange Cash</div>
+  </div>
+  <div class="orange-label">ORANGE CASH</div>
+</header>
+
+<div class="status">
+  <span class="dot"></span>
+  <span id="statusText">صفحة التحويل جاهزة</span>
+</div>
+
+<section class="amount-box">
+  <div class="small">المبلغ المطلوب تحويله</div>
+
+  <div class="amount">
+    <output id="amountDisplay">100</output>
+    <span class="currency">EGP</span>
+  </div>
+
+  <div class="small">جنيه مصري</div>
+
+  <input
+    class="amount-input"
+    id="amountInput"
+    type="number"
+    min="1"
+    max="100000"
+    value="100"
+    placeholder="اكتب المبلغ"
+  >
+
+  <div class="quick">
+    <button data-amount="50">50 جنيه</button>
+    <button data-amount="100">100 جنيه</button>
+    <button data-amount="200">200 جنيه</button>
+    <button data-amount="500">500 جنيه</button>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-title">
+    <strong>محفظة المستلم</strong>
+    <span>ORANGE CASH</span>
+  </div>
+
+  <div class="wallet-row">
+    <input
+      class="wallet-input"
+      id="walletNumber"
+      type="tel"
+      inputmode="numeric"
+      maxlength="11"
+      placeholder="رقم المحفظة"
+    >
+    <button class="copy-btn" id="copyWallet">نسخ الرقم</button>
+  </div>
+
+  <p class="helper">
+    تأكد من رقم المحفظة قبل التحويل.
+  </p>
+</section>
+
+<section class="steps">
+  <div class="steps-title">طريقة التحويل</div>
+
+  <div class="step">
+    <span class="number">1</span>
+    <p>انسخ رقم محفظة المستلم.</p>
+  </div>
+
+  <div class="step">
+    <span class="number">2</span>
+    <p>افتح تطبيق Orange Cash واختر تحويل الأموال.</p>
+  </div>
+
+  <div class="step">
+    <span class="number">3</span>
+    <p>اكتب المبلغ المعروض وراجع بيانات المستلم.</p>
+  </div>
+
+  <div class="step">
+    <span class="number">4</span>
+    <p>أكّد التحويل من التطبيق الرسمي بنفسك.</p>
+  </div>
+</section>
+
+<div class="actions">
+  <button class="btn primary" id="copyDetails">
+    نسخ بيانات التحويل
+  </button>
+
+  <button class="btn secondary" id="sharePage">
+    مشاركة الصفحة
+  </button>
+</div>
+
+<div class="notice">
+  تنبيه: MAYER PAY واجهة مستقلة غير تابعة لشركة Orange.
+  الموقع لا ينفذ تحويلات مالية ولا يتحقق من استلام الأموال.
+  تأكد دائمًا من نجاح العملية داخل تطبيق Orange Cash.
+</div>
+
+</article>
+
+<footer class="footer">
+  <b>MAYER PAY</b> · PREMIUM NFC EXPERIENCE
+  <br>
+  SMART PAYMENT INTERFACE
+</footer>
+
+</main>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+/* إعدادات MAYER PAY */
+const WALLET_NUMBER = "";
+const DEFAULT_AMOUNT = 100;
+
+const amountInput = document.getElementById("amountInput");
+const amountDisplay = document.getElementById("amountDisplay");
+const walletInput = document.getElementById("walletNumber");
 const toast = document.getElementById("toast");
+
+walletInput.value = WALLET_NUMBER;
+amountInput.value = DEFAULT_AMOUNT;
+
+const params = new URLSearchParams(location.search);
+
+if (params.get("source") === "nfc") {
+  document.getElementById("statusText").textContent =
+    "تم فتح MAYER PAY عبر رابط NFC";
+}
+
 function notify(message) {
   toast.textContent = message;
   toast.classList.add("show");
-  setTimeout(() => toast.classList.remove("show"), 1800);
+
+  clearTimeout(notify.timer);
+
+  notify.timer = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2200);
 }
-async function copyText(text) {
+
+function getAmount() {
+  const value = Number(amountInput.value);
+
+  if (!Number.isFinite(value) || value < 1 || value > 100000) {
+    return null;
+  }
+
+  return value;
+}
+
+function formatAmount(value) {
+  return new Intl.NumberFormat("en-US").format(value);
+}
+
+function updateAmount() {
+  const amount = getAmount();
+
+  amountDisplay.textContent =
+    amount === null ? "—" : formatAmount(amount);
+}
+
+async function copyText(text, message) {
   try {
     await navigator.clipboard.writeText(text);
-    notify("تم النسخ بنجاح");
+    notify(message);
   } catch {
-    const area = document.createElement("textarea");
-    area.value = text;
-    document.body.appendChild(area);
-    area.select();
-    document.execCommand("copy");
-    area.remove();
-    notify("تم النسخ");
+    notify("تعذر النسخ، حاول مرة أخرى");
   }
 }
-document.getElementById("copyBtn").addEventListener("click", () => copyText(WALLET_NUMBER));
-document.getElementById("copyAll").addEventListener("click", () => {
-  copyText("Orange Cash\nرقم المحفظة: " + WALLET_NUMBER + "\nالمبلغ: " + AMOUNT + " جنيه");
+
+amountInput.addEventListener("input", updateAmount);
+
+document.querySelectorAll("[data-amount]").forEach(button => {
+  button.addEventListener("click", () => {
+    amountInput.value = button.dataset.amount;
+    updateAmount();
+  });
 });
+
+document.getElementById("copyWallet").addEventListener("click", () => {
+  const wallet = walletInput.value.trim();
+
+  if (!/^01[0-9]{9}$/.test(wallet)) {
+    notify("أدخل رقم محفظة صحيحًا");
+    return;
+  }
+
+  copyText(wallet, "تم نسخ رقم المحفظة");
+});
+
+document.getElementById("copyDetails").addEventListener("click", () => {
+  const amount = getAmount();
+  const wallet = walletInput.value.trim();
+
+  if (!amount) {
+    notify("اكتب مبلغًا صحيحًا");
+    return;
+  }
+
+  if (!/^01[0-9]{9}$/.test(wallet)) {
+    notify("أدخل رقم المحفظة أولًا");
+    return;
+  }
+
+  const details =
+    "MAYER PAY - Orange Cash\n" +
+    "رقم المحفظة: " + wallet + "\n" +
+    "المبلغ: " + formatAmount(amount) + " جنيه";
+
+  copyText(details, "تم نسخ بيانات التحويل");
+});
+
+document.getElementById("sharePage").addEventListener("click", async () => {
+  const data = {
+    title: "MAYER PAY",
+    text: "Orange Cash Transfer",
+    url: location.href
+  };
+
+  if (navigator.share) {
+    try {
+      await navigator.share(data);
+    } catch (error) {
+      if (error.name !== "AbortError") {
+        notify("تعذرت المشاركة");
+      }
+    }
+  } else {
+    copyText(location.href, "تم نسخ رابط الصفحة");
+  }
+});
+
+updateAmount();
 </script>
 </body>
 </html>
